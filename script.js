@@ -7,12 +7,10 @@ const nextYearContainer = document.querySelector('#year')
 const spinnerLoading = document.querySelector('#loading')
 const contdownContainer = document.querySelector('#countdown')
 
+const targetYear = 2024; // Alterado para o ano desejado
+const targetDate = new Date(`August 20 ${targetYear} 00:00:00`); // Alterado para a data desejada
 
-
-const nextYear = new Date().getFullYear()
-const newYearTime = new Date(`August 20 ${nextYear} 00:00:00`)
-
-nextYearContainer.textContent = 'Stefhanny'
+nextYearContainer.textContent = targetYear;
 
 const getTimeUnit = unit => unit < 10 ? '0' + unit : unit
 
@@ -25,29 +23,19 @@ const insertCountdownValues = ({ days, hours, minutes, seconds }) => {
 
 const updateCountdown = () => {
     const currentTime = new Date()
-    const difference = newYearTime - currentTime
+    const difference = targetDate - currentTime
     const days = Math.floor(difference / 1000 / 60 / 60 / 24)
     const hours = Math.floor(difference / 1000 / 60 / 60) % 24
     const minutes = Math.floor(difference / 1000 / 60) % 60
     const seconds = Math.floor(difference / 1000) % 60
 
     insertCountdownValues({ days, hours, minutes, seconds })
-
-    // console.log({days, hours, minutes, seconds})
-
-
 }
 
 const initialScreen = () => {
     spinnerLoading.remove()
-
     contdownContainer.style.display = 'flex'
 }
 
 setTimeout(initialScreen, 1000)
-
-
-setInterval(updateCountdown
-    , 1000)
-
-
+setInterval(updateCountdown, 1000)
